@@ -10,28 +10,37 @@ body {
 
 .card__ingredients {
     text-transform: uppercase;
+    padding: 30px 30px 0;
 }
 
-.card__article-list:first-child {
-    border-top: 1px solid lightgrey;
+.card__title {
+    padding: 0 30px;
 }
+
+.card__buttons {
+    padding: 0 30px;
+    border-bottom: 1px solid #4a90e2;
+}
+
+.card__button--select, .card__button--unselect {
+    margin: 15px 0;
+}
+
 .card__article__container {
     padding: 20px;
     display: grid;
     grid-template-columns: 50px 75px 1fr 100px;
-    grid-template-rows: 20px 20px 20px;
-    grid-template-areas:    "checkbox amount title price"
-                            "checkbox amount brand price"
-                            "checkbox amount weight price";
+    grid-template-rows: 40px 20px 20px;
+    grid-template-areas:    ".        amount title  ."
+                            "checkbox amount brand  price"
+                            ".        amount weight .";
     border-bottom: 1px solid lightgrey;
-    border-top: 1px solid lightgrey;
 }
 
 .card__article__checkbox {
     grid-area: checkbox;
-    margin: auto 0;
 }
-        
+
 .card__article__title {
     grid-area: title;
     font-size: 16px;
@@ -57,7 +66,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto 0;
     color: #4a90e2;
     font-size: 24px;
     font-weight: 700;
@@ -68,7 +76,76 @@ body {
     font-size: 18px;
     color: #4d8f00;
     text-align: right;
-    margin: auto 0;
+}
+
+
+
+.visually-hidden {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+.card__items--title {
+    padding: 30px 30px 20px;
+    font-size: 12px;
+    color: lightgrey;
+}
+
+.card__subtotal {
+    padding: 0 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card__subtotal--title {
+    font-size: 14px;
+    color: lightgrey;
+}
+
+.card__subtotal--total {
+    font-size: 14px;
+}
+
+.card__shipping-cost {
+    padding: 0 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card__shipping-cost--title {
+    font-size: 14px;
+    color: lightgrey;
+}
+
+.card__shipping-cost--total {
+    font-size: 14px;
+}
+
+.card__total {
+    padding: 0 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card__total--title {
+    font-size: 14px;
+}
+
+.card__total--total {
+    font-size: 24px;
+    color: #4d8f00;
 }
 
 .card__button--buy {
@@ -77,13 +154,11 @@ body {
     color: #eee;
     font-size: 18px;
     font-weight: 700;
-    margin: 0 30px;
+    margin: 10px 30px 30px;
 }
 
-.visually-hidden {
-    position: absolute !important;
-    height: 1px; width: 1px;
-    overflow: hidden;
-    clip: rect(1px 1px 1px 1px);
-    clip: rect(1px, 1px, 1px, 1px);
+@media all and (min-width: 768px) {
+    .card__article__container {
+        grid-template-rows: 20px 20px 20px ;
+    }
 }
