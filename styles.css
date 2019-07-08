@@ -7,3 +7,83 @@
 body {
     min-height: 100vh;
 }
+
+.card__ingredients {
+    text-transform: uppercase;
+}
+
+.card__article-list:first-child {
+    border-top: 1px solid lightgrey;
+}
+.card__article__container {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 50px 75px 1fr 100px;
+    grid-template-rows: 20px 20px 20px;
+    grid-template-areas:    "checkbox amount title price"
+                            "checkbox amount brand price"
+                            "checkbox amount weight price";
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+}
+
+.card__article__checkbox {
+    grid-area: checkbox;
+    margin: auto 0;
+}
+        
+.card__article__title {
+    grid-area: title;
+    font-size: 16px;
+}
+
+.card__article__brand {
+    grid-area: brand;
+    font-size: 8px;
+    color: lightgrey;
+}
+
+.card__article__weight {
+    grid-area: weight;
+    font-size: 8px;
+}
+
+.card__article__amount {
+    grid-area: amount;
+    height: 60px;
+    width: 60px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto 0;
+    color: #4a90e2;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.card__article__price {
+    grid-area: price;
+    font-size: 18px;
+    color: #4d8f00;
+    text-align: right;
+    margin: auto 0;
+}
+
+.card__button--buy {
+    height: 50px;
+    background-color: #4d8f00;
+    color: #eee;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 30px;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+}

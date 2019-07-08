@@ -10,18 +10,33 @@
 </head>
 <body class="main-page">
     <div class="card">
-        <p class="card__ingredients">Ingredients</p>
+        <p class="card__ingredients">Ingredientes</p>
         <h2 class="card__title"></h2>
         <div class="card__buttons">
-            <button class="card__button--select">Seleccionar todo</button>
-            <button class="card__button--unselect">Deseleccionar todo</button>
+            <a href="#" class="card__button--select">Seleccionar todo</a>
+            <span>|</span>
+            <a href="#" class="card__button--unselect">Deseleccionar todo</a>
         </div>
         <div class="card__article-list"></div>
-        <div class="card__items"></div>
-        <div class="card__subtotal"></div>
-        <div class="card__shipping-cost"></div>
-        <div class="card__total"></div>
-        <button>Comprar ingredientes: <span></span></button>
+        <div class="card__items">
+            <h2 class="card__items--title">Items:</h2>
+            <p class="card__items--total"></p>
+        </div>
+        <div class="card__subtotal">
+            <h2 class="card__subtotal--title">Subtotal</h2>
+            <p class="card__subtotal--total"></p>
+        </div>
+        <div class="card__shipping-cost">
+            <h2 class="card__shipping-cost--title">Gastos de envío</h2>
+            <p class="card__shipping-cost--total"></p>
+        </div>
+        <div class="card__total">
+            <h2 class="card__total--title">Total</h2>
+            <p class="card__total--total"></p>
+        </div>
+        <button class="card__button--buy">Comprar ingredientes: 
+            <span class="card__total-price"></span> €
+        </button>
     </div>
     <script type="text/javascript" src="main.js"></script>
 </body>
