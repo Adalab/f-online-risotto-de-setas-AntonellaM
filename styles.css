@@ -31,14 +31,30 @@ body {
     display: grid;
     grid-template-columns: 50px 75px 1fr 100px;
     grid-template-rows: 40px 20px 20px;
-    grid-template-areas:    ".        amount title  ."
+    grid-template-areas:    "checkbox amount title  price"
                             "checkbox amount brand  price"
-                            ".        amount weight .";
+                            "checkbox amount weight price";
     border-bottom: 1px solid lightgrey;
 }
 
 .card__article__checkbox {
+    margin: auto 0;
     grid-area: checkbox;
+}
+
+.card__article__amount {
+    margin: auto 0;
+    grid-area: amount;
+    height: 60px;
+    width: 60px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4a90e2;
+    font-size: 24px;
+    font-weight: 700;
 }
 
 .card__article__title {
@@ -57,28 +73,13 @@ body {
     font-size: 8px;
 }
 
-.card__article__amount {
-    grid-area: amount;
-    height: 60px;
-    width: 60px;
-    border: 1px solid lightgrey;
-    border-radius: 2px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #4a90e2;
-    font-size: 24px;
-    font-weight: 700;
-}
-
 .card__article__price {
+    margin: auto 0;
     grid-area: price;
     font-size: 18px;
     color: #4d8f00;
     text-align: right;
 }
-
-
 
 .visually-hidden {
     position: absolute !important;
@@ -168,6 +169,7 @@ body {
 
 @media all and (min-width: 768px) {
     .card__article__container {
+        padding: 10px 20px;
         grid-template-rows: 20px 20px 20px ;
     }
 }
