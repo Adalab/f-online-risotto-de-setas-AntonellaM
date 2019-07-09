@@ -9,6 +9,7 @@ const totalItemsEl = document.querySelector('.card__items--total');
 const subtotalPriceEl = document.querySelector('.card__subtotal--total');
 const totalPriceEl = document.querySelector('.card__total--total');
 const shippingPriceEl = document.querySelector('.card__shipping-cost--total');
+const buttonPriceEl = document.querySelector('.card__total-price');
 let totalItems = 0;
 let totalPrice = 0;
 const shippingPrice = 7;
@@ -19,6 +20,7 @@ function setPurchaseValues() {
     subtotalPriceEl.innerHTML = `${totalPrice.toFixed(2)} €`;
     shippingPriceEl.innerHTML = `${shippingPrice.toFixed(2)} €`;
     totalPriceEl.innerHTML = totalItems !== 0 ? `${(totalPrice + shippingPrice).toFixed(2)} €` : `${totalPrice.toFixed(2)} €`;
+    buttonPriceEl.innerHTML = totalPriceEl.innerHTML;
 }
 
 function handleRecipeCheckbox(event) {
