@@ -4,7 +4,6 @@ const rissotoRecipeURL = 'https://raw.githubusercontent.com/Adalab/recipes-data/
 
 const cardTitleEl = document.querySelector('.card__title');
 const cardArticleListEl = document.querySelector('ul.container-fluid');
-console.log(cardArticleListEl);
 let recipeCheckboxes = [];
 const totalItemsEl = document.querySelector('.card__items--total');
 const subtotalPriceEl = document.querySelector('.card__subtotal--total');
@@ -40,6 +39,40 @@ function handleRecipeCheckbox(event) {
     setPurchaseValues();
 }
 
+function addClasses(newElement, classes) {
+    for (let i = 0; i < classes.length; i++) {
+        newElement.classList.add(classes[i]);
+    }
+}
+
+function addText(newElement, text) {
+    const newText = document.createTextNode(text);
+    newElement.appendChild(newText);
+}
+
+function addAttributes(newElement, attributes) {
+    console.log('fx', attributes, attributes[1][name], attributes[1].name)
+    for (let i = 0; i < attributes.length; i++) {
+        newElement.setAttribute(attributes[i][name], attributes[i].name);
+    }
+}
+
+function createElement(element, classes, text, attributes) {
+    const newElement = document.createElement(element);
+    console.log(attributes)
+    classes && addClasses(newElement, classes);
+    text && addText(newElement, text);
+    attributes && addAttributes(newElement, attributes)
+
+    return newElement;
+}
+
+function appendChildren(element, children) {
+    for (let i = 0; i < children.length; i++) {
+        element.appendChild(children[i]);
+    }
+}
+
 function createRecipeCard(object) {
 
     const cardTitle = document.createTextNode(object.name);
@@ -47,67 +80,34 @@ function createRecipeCard(object) {
 
     for (let i = 0; i < object.ingredients.length; i++) {
 
-        const articleContainerEl = document.createElement('li');
+        const articleContainerEl = createElement('li', ['row', 'card__article__container']);
 
         //Checkbox
-        const articleCheckboxEl = document.createElement('input');
-        articleCheckboxEl.classList.add('card__article__checkbox');
-        articleCheckboxEl.classList.add('col-1');
-        articleCheckboxEl.classList.add('d-flex');
-        articleCheckboxEl.classList.add('justify-content-center');
-        articleCheckboxEl.classList.add('align-items-center');
 
-        articleCheckboxEl.type = 'checkbox';
-        articleCheckboxEl.id = `${object.ingredients[i].product.replace(new RegExp(' ', 'g'), '_').replace(new RegExp(',', 'g'), '_').toLowerCase()}`;
+        const articleCheckboxContainerEl = createElement('div', ['d-flex', 'justify-content-center', 'align-items-center', 'col-1']);
+        const articleCheckboxEl = createElement('input', ['card__article__checkbox'], null, [{'type': 'checkbox'}, {'id': `${object.ingredients[i].product.replace(new RegExp(' ', 'g'), '_').replace(new RegExp(',', 'g'), '_').toLowerCase()}`}]);
+        // articleCheckboxEl.type = 'checkbox';
+        // articleCheckboxEl.id = `${object.ingredients[i].product.replace(new RegExp(' ', 'g'), '_').replace(new RegExp(',', 'g'), '_').toLowerCase()}`;
+        articleCheckboxContainerEl.appendChild(articleCheckboxEl);
 
+        //Amount
 
-        const articleTitleEl = document.createElement('h3');
-        const articleBrandEl = document.createElement('h4');
-        const articleDataEl = document.createElement('div');
-        const articleWeightEl = document.createElement('p');
-        const articleAmountEl = document.createElement('p');
-        const articlePriceEl = document.createElement('p');
-        //const articleLabelEl = document.createElement('label');
+        const articleAmountContainerEl = createElement('div', ['d-flex', 'justify-content-center', 'align-items-center', 'col-2']);
+        const articleAmountEl = createElement('p', ['card__article__amount', 'd-flex', 'justify-content-center', 'align-items-center'], object.ingredients[i].items, [{'data-amount': `${object.ingredients[i].product.replace(new RegExp(' ', 'g'), '_').replace(new RegExp(',', 'g'), '_').toLowerCase()}`}]); 
+        articleAmountContainerEl.appendChild(articleAmountEl);
 
-        articleContainerEl.classList.add('row');
-        articleDataEl.classList.add('col-8');
-        articleTitleEl.classList.add('card__article__title');
-        articleBrandEl.classList.add('card__article__brand');
-        articleWeightEl.classList.add('card__article__weight');
-        articleAmountEl.classList.add('card__article__amount');
-        articleAmountEl.classList.add('col-1')
-
-        articleAmountEl.setAttribute('data-amount', `${object.ingredients[i].product.replace(new RegExp(' ', 'g'), '_').replace(new RegExp(',', 'g'), '_').toLowerCase()}`);
-        articlePriceEl.classList.add('card__article__price');
-        articlePriceEl.classList.add('col-2');
-        articlePriceEl.setAttribute('data-price', `${object.ingredients[i].product.replace(new RegExp(' ', 'g'), '_').replace(new RegExp(',', 'g'), '_').toLowerCase()}`);
-
-        //articleLabelEl.classList.add('visually-hidden');
-        //articleLabelEl.for = `${object.ingredients[i].product}`;
+        //Data
+        const articleDataContainerEl = createElement('div', ['col-7']);
+        const articleTitleEl = createElement('h3', ['card__article__title'], object.ingredients[i].product);
+        const articleBrandEl = createElement('h4', ['card__article__brand'], object.ingredients[i].brand);
+        const articleWeightEl = createElement('p', ['card__article__weight'], object.ingredients[i].quantity);
+        appendChildren(articleDataContainerEl, [articleTitleEl, articleBrandEl, articleWeightEl]);
+        
+        //Price
+        const articlePriceEl = createElement('p', ['card__article__price', 'col-2'], `${object.ingredients[i].price} €`, [{'data-price': `${object.ingredients[i].product.replace(new RegExp(' ', 'g'), '_').replace(new RegExp(',', 'g'), '_').toLowerCase()}`}]);
 
 
-        const articleTitle = document.createTextNode(object.ingredients[i].product);
-        const articleBrand = document.createTextNode(object.ingredients[i].brand);
-        const articleWeight = document.createTextNode(object.ingredients[i].quantity);
-        const articleAmount = document.createTextNode(object.ingredients[i].items);
-        const articlePrice = document.createTextNode(`${object.ingredients[i].price} €`);
-        const articleLabel = document.createTextNode(`${object.ingredients[i].product}`);
-
-        articleTitleEl.appendChild(articleTitle);
-        articleBrandEl.appendChild(articleBrand);
-        articleWeightEl.appendChild(articleWeight);
-        articleAmountEl.appendChild(articleAmount);
-        articlePriceEl.appendChild(articlePrice);
-        //articleLabelEl.appendChild(articleLabel);
-        articleDataEl.appendChild(articleTitleEl);
-        articleDataEl.appendChild(articleBrandEl);
-        articleDataEl.appendChild(articleWeightEl);
-
-        articleContainerEl.appendChild(articleCheckboxEl);
-        articleContainerEl.appendChild(articleAmountEl);
-        articleContainerEl.appendChild(articleDataEl);
-        articleContainerEl.appendChild(articlePriceEl);
-        //articleContainerEl.appendChild(articleLabelEl);
+        appendChildren(articleContainerEl, [articleCheckboxContainerEl, articleAmountContainerEl, articleDataContainerEl, articlePriceEl])
 
         cardArticleListEl.appendChild(articleContainerEl);
     }
