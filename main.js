@@ -51,9 +51,11 @@ function addText(newElement, text) {
 }
 
 function addAttributes(newElement, attributes) {
-    console.log('fx', attributes, attributes[1][name], attributes[1].name)
-    for (let i = 0; i < attributes.length; i++) {
-        newElement.setAttribute(attributes[i][name], attributes[i].name);
+    for (var name in attributes) {
+        console.log('fx', attributes, name, attributes[name])
+
+        newElement.setAttribute(name, attributes[name]);
+
     }
 }
 
