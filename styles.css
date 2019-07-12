@@ -6,6 +6,11 @@
 
 body {
     min-height: 100vh;
+    max-width: 100vw;
+}
+
+.main-container {
+    padding: 0;
 }
 
 .card__ingredients {
@@ -38,7 +43,7 @@ body {
 }
 
 .card__article__checkbox {
-    margin: auto 0;
+    margin: auto auto;
     grid-area: checkbox;
 }
 
@@ -166,6 +171,7 @@ body {
     font-weight: 700;
     margin: 10px 30px 30px;
 }
+
 
 @media all and (min-width: 768px) {
     .card__article__container {

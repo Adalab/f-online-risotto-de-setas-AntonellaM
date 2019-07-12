@@ -3,7 +3,8 @@
 const rissotoRecipeURL = 'https://raw.githubusercontent.com/Adalab/recipes-data/master/rissoto-setas.json';
 
 const cardTitleEl = document.querySelector('.card__title');
-const cardArticleListEl = document.querySelector('.card__article-list');
+const cardArticleListEl = document.querySelector('ul.container-fluid');
+console.log(cardArticleListEl);
 let recipeCheckboxes = [];
 const totalItemsEl = document.querySelector('.card__items--total');
 const subtotalPriceEl = document.querySelector('.card__subtotal--total');
@@ -46,29 +47,44 @@ function createRecipeCard(object) {
 
     for (let i = 0; i < object.ingredients.length; i++) {
 
-        const articleContainerEl = document.createElement('div');
+        const articleContainerEl = document.createElement('li');
+
+        //Checkbox
+        const articleCheckboxEl = document.createElement('input');
+        articleCheckboxEl.classList.add('card__article__checkbox');
+        articleCheckboxEl.classList.add('col-1');
+        articleCheckboxEl.classList.add('d-flex');
+        articleCheckboxEl.classList.add('justify-content-center');
+        articleCheckboxEl.classList.add('align-items-center');
+
+        articleCheckboxEl.type = 'checkbox';
+        articleCheckboxEl.id = `${object.ingredients[i].product.replace(new RegExp(' ', 'g'), '_').replace(new RegExp(',', 'g'), '_').toLowerCase()}`;
+
+
         const articleTitleEl = document.createElement('h3');
         const articleBrandEl = document.createElement('h4');
+        const articleDataEl = document.createElement('div');
         const articleWeightEl = document.createElement('p');
         const articleAmountEl = document.createElement('p');
         const articlePriceEl = document.createElement('p');
-        const articleLabelEl = document.createElement('label');
-        const articleCheckboxEl = document.createElement('input');
+        //const articleLabelEl = document.createElement('label');
 
-        articleContainerEl.classList.add('card__article__container');
+        articleContainerEl.classList.add('row');
+        articleDataEl.classList.add('col-8');
         articleTitleEl.classList.add('card__article__title');
         articleBrandEl.classList.add('card__article__brand');
         articleWeightEl.classList.add('card__article__weight');
         articleAmountEl.classList.add('card__article__amount');
+        articleAmountEl.classList.add('col-1')
+
         articleAmountEl.setAttribute('data-amount', `${object.ingredients[i].product.replace(new RegExp(' ', 'g'), '_').replace(new RegExp(',', 'g'), '_').toLowerCase()}`);
         articlePriceEl.classList.add('card__article__price');
+        articlePriceEl.classList.add('col-2');
         articlePriceEl.setAttribute('data-price', `${object.ingredients[i].product.replace(new RegExp(' ', 'g'), '_').replace(new RegExp(',', 'g'), '_').toLowerCase()}`);
 
-        articleLabelEl.classList.add('visually-hidden');
-        articleLabelEl.for = `${object.ingredients[i].product}`;
-        articleCheckboxEl.classList.add('card__article__checkbox');
-        articleCheckboxEl.type = 'checkbox';
-        articleCheckboxEl.id = `${object.ingredients[i].product.replace(new RegExp(' ', 'g'), '_').replace(new RegExp(',', 'g'), '_').toLowerCase()}`;
+        //articleLabelEl.classList.add('visually-hidden');
+        //articleLabelEl.for = `${object.ingredients[i].product}`;
+
 
         const articleTitle = document.createTextNode(object.ingredients[i].product);
         const articleBrand = document.createTextNode(object.ingredients[i].brand);
@@ -82,15 +98,16 @@ function createRecipeCard(object) {
         articleWeightEl.appendChild(articleWeight);
         articleAmountEl.appendChild(articleAmount);
         articlePriceEl.appendChild(articlePrice);
-        articleLabelEl.appendChild(articleLabel);
+        //articleLabelEl.appendChild(articleLabel);
+        articleDataEl.appendChild(articleTitleEl);
+        articleDataEl.appendChild(articleBrandEl);
+        articleDataEl.appendChild(articleWeightEl);
 
-        articleContainerEl.appendChild(articleTitleEl);
-        articleContainerEl.appendChild(articleBrandEl);
-        articleContainerEl.appendChild(articleWeightEl);
-        articleContainerEl.appendChild(articleAmountEl);
-        articleContainerEl.appendChild(articlePriceEl);
-        articleContainerEl.appendChild(articleLabelEl);
         articleContainerEl.appendChild(articleCheckboxEl);
+        articleContainerEl.appendChild(articleAmountEl);
+        articleContainerEl.appendChild(articleDataEl);
+        articleContainerEl.appendChild(articlePriceEl);
+        //articleContainerEl.appendChild(articleLabelEl);
 
         cardArticleListEl.appendChild(articleContainerEl);
     }
